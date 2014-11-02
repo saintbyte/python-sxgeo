@@ -27,3 +27,20 @@ name_ru='Маунтин-Вью', name_en='', okato='')
 SxRecord(country_seek=9395, id=5332921, lat=37.25, lon=-119.75, 
 name_ru='Калифорния', name_en='', iso='', timezone='', okato='')
 ```
+
+
+### loc_server 
+requirement: bottle , paste 
+install pip install bottle 
+        pip install paste
+
+nginx conf 
+````
+        location /loc/ip {
+                proxy_pass http://localhost:8888/ip;
+        }
+
+        location /loc/ip/my {
+                proxy_pass http://localhost:8888/ip/?ip=$remote_addr&$args;
+        }
+````
