@@ -6,7 +6,14 @@ from sxgeo import SxAPI
 @route('/ip/')
 def index():
     response.content_type = 'application/json; charset=utf-8'
-    ip=request.query.ip
+    try:
+	ip=request.query.ip
+    except:
+        return "{'error':'empty ip'}"
+    try:
+       flog.write(" "+ip+"\n")
+    except:
+       pass # No ochen loho
     arr={}
     arr['ip']=ip
     iploc = api.locate(ip)
@@ -21,6 +28,6 @@ def index():
     if (request.query.callback):
         s = request.query.callback+"("+s+")"
     return s
-
+flog = open('ips','a')
 api = SxAPI('../bash_get/SxGeoCity.dat')
-run(host='0.0.0.0', port=5001,server='paste') #server='paste'
+run(host='127.0.0.1', port=5001,server='paste') #server='paste'
